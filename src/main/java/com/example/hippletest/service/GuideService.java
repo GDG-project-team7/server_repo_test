@@ -14,9 +14,9 @@ public class GuideService {
     private final GuideRepository guideRepository;
 
     @Transactional
-    public Guide saveGuide(Guide guide){
-        guideRepository.save(guide);
-        return guide;
+    public Long saveGuide(Guide guide){
+        Guide savedGuide = guideRepository.save(guide);
+        return savedGuide.getUserId();
     }
 
     @Transactional

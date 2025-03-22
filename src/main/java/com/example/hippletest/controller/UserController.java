@@ -22,7 +22,7 @@ public class UserController {
     private final GuideService guideService;
 
     @PostMapping("/saveGuide")
-    public ResponseEntity<Guide> saveGuide(@RequestBody Guide guide) {
+    public ResponseEntity<Long> saveGuide(@RequestBody Guide guide) {
         return ResponseEntity.ok().body(guideService.saveGuide(guide));
     }
 
