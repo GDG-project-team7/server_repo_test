@@ -1,5 +1,6 @@
 package com.example.hippletest.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
 import lombok.Getter;
@@ -16,9 +17,11 @@ import java.util.List;
 public class Guide extends User {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "portfolio_id")
+    @JsonIgnore
     private Portfolio portfolio; // Guide는 1개의 Portfolio를 가짐
 
     @OneToMany(mappedBy = "guide", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Form> forms = new ArrayList<>(); // Guide는 여러 개의 Form을 가짐
 
     public Guide(String password, String userName, boolean isGuide, int regionId, String email, String phoneNumber, int birthday6Numbers, String userAccountName, boolean gender) {
