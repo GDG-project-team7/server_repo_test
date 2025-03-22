@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/user")
@@ -22,8 +25,11 @@ public class UserController {
     private final GuideService guideService;
 
     @PostMapping("/saveGuide")
-    public ResponseEntity<Long> saveGuide(@RequestBody Guide guide) {
-        return ResponseEntity.ok().body(guideService.saveGuide(guide));
+    public ResponseEntity<Map<String, Long>> saveGuide(@RequestBody Guide guide) {
+        Long guideId = guideService.saveGuide(guide);
+        Map<String, Long> response = new HashMap<>();
+        response.put("userId", guideId);  // JSON 형태로 변환됨
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/saveTraveler")
