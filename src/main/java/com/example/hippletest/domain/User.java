@@ -23,13 +23,16 @@ public abstract class User {
     @Column(name = "user_name")
     private String userName;
 
+    private String userAccountName;
+
     private boolean isGuide;
     private int regionId;
     private String email;
     private String phoneNumber;
     private int birthday6Numbers;
+    private boolean gender;
 
-    public User(String password, String userName, boolean isGuide, int regionId, String email, String phoneNumber, int birthday6Numbers) {
+    public User(String password, String userName, boolean isGuide, int regionId, String email, String phoneNumber, int birthday6Numbers, String userAccountName, boolean Gender) {
         this.password = password;
         this.userName = userName;
         this.isGuide = isGuide;
@@ -37,5 +40,7 @@ public abstract class User {
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.birthday6Numbers = birthday6Numbers;
+        this.userAccountName = userAccountName;
+        this.gender = Gender;
     }
 }

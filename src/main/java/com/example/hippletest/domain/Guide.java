@@ -21,13 +21,10 @@ public class Guide extends User {
     @OneToMany(mappedBy = "guide", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Form> forms = new ArrayList<>(); // Guide는 여러 개의 Form을 가짐
 
-    private String textProfile;
-    private String introduction;
+    public Guide(String password, String userName, boolean isGuide, int regionId, String email, String phoneNumber, int birthday6Numbers, String userAccountName, boolean gender) {
+        super(password, userName, true, regionId, email, phoneNumber, birthday6Numbers, userAccountName, gender);
 
-    public Guide(String password, String userName, boolean isGuide, int regionId, String email, String phoneNumber, int birthday6Numbers, String textProfile, String introduction) {
-        super(password, userName, true, regionId, email, phoneNumber, birthday6Numbers);
-        this.textProfile = textProfile;
-        this.introduction = introduction;
         this.portfolio = null; // ✅ Portfolio는 나중에 설정 가능
+        this.forms = null;
     }
 }
