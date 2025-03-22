@@ -3,9 +3,9 @@ package com.example.hippletest.service;
 import com.example.hippletest.domain.Guide;
 import com.example.hippletest.domain.Portfolio;
 import com.example.hippletest.repository.GuideRepository;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.List;
 public class TravelerService {
     private final GuideRepository guideRepository;
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<Guide> getRegionGuide(Long regionId){
         List<Guide> guideList;
         guideList = guideRepository.findAllByRegionId(regionId);
