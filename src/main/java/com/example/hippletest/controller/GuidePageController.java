@@ -7,6 +7,7 @@ import com.example.hippletest.service.GuideService;
 import com.example.hippletest.service.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -41,8 +42,8 @@ public class GuidePageController {
 
     //가이드 포트폴리오 저장 ########################
     @PostMapping("/savePortfolio/{guideId}")
-    public Portfolio savePortfolio(@PathVariable Long guideId, @RequestBody Portfolio portfolio) {
-        return guideService.savePortfolio(guideId, portfolio);
+    public ResponseEntity<Portfolio> savePortfolio(@PathVariable Long guideId, @RequestBody Portfolio portfolio) {
+        return ResponseEntity.ok().body(guideService.savePortfolio(guideId, portfolio));
     }
 
 }
