@@ -34,7 +34,7 @@ public class Form {
         this.gender = gender;
         this.text = text;
         this.travelDate = travelDate;
-        this.guide = guide;
+        this.guide = null;
         this.traveler = traveler;
         this.isAccepted = isAccepted;
     }

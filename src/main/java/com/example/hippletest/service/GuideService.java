@@ -27,6 +27,8 @@ public class GuideService {
         guide.setPortfolio(portfolio);
         guideRepository.save(guide);
 
+        guide.setIntroduction();
+
         return portfolio;
     }
 }
