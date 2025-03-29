@@ -14,12 +14,12 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class Guide extends User {
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "portfolio_id")
     @JsonIgnore
     private Portfolio portfolio; // Guide는 1개의 Portfolio를 가짐
 
-    @OneToMany(mappedBy = "guide", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "guide", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Form> forms = new ArrayList<>(); // Guide는 여러 개의 Form을 가짐
 

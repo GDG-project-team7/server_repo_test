@@ -28,9 +28,15 @@ public class TravelerService {
                 .orElseThrow(RuntimeException::new);
     }
 
-    public Portfolio getPortfolioByGuideId(Long guideId){
-        Guide guide = getGuide(guideId);
+    @Transactional
+    public Portfolio getPortfolioByGuideId(Long guideId) {
+        Guide guide = guideRepository.findById(guideId)
+                .orElseThrow(() -> new RuntimeException("Guide not found with ID: " + guideId));
+
         Portfolio portfolio = guide.getPortfolio();
+        if (portfolio == null) {
+            throw new RuntimeException("Portfolio not found for Guide with ID: " + guideId);
+        }
 
         return portfolio;
     }
