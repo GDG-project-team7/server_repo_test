@@ -1,6 +1,7 @@
 package com.example.hippletest.controller;
 
 import com.example.hippletest.domain.Form;
+import com.example.hippletest.dto.RequestFormDto;
 import com.example.hippletest.service.FormService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -13,13 +14,9 @@ public class MatchingController {
     private final FormService formService;
 
     // 1. Traveler가 Guide를 선택하고 Form을 제출
-    @PostMapping("/{travelerId}/select-guide/{guideId}")
-    public ResponseEntity<String> submitForm(
-            @PathVariable Long travelerId,
-            @PathVariable Long guideId,
-            @RequestBody Form formRequest) {
-
-        return ResponseEntity.ok().body(formService.submitForm(travelerId, guideId, formRequest));
+    @PostMapping("/select-guide")
+    public ResponseEntity<String> submitForm(@RequestBody RequestFormDto requestFormDto) {
+        return ResponseEntity.ok().body(formService.submitForm(requestFormDto));
     }
 
     // 2. Guide의 견적서 수락
