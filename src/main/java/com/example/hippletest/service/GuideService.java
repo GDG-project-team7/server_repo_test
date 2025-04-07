@@ -25,6 +25,8 @@ public class GuideService {
                 .orElseThrow(() -> new EntityNotFoundException("Guide not found"));
 
         guide.setPortfolio(portfolio);
+        portfolio.setGuide(guide);
+
         guideRepository.save(guide);
 
         guide.setIntroduction();

@@ -23,9 +23,9 @@ public class MatchingController {
     }
 
     // 2. Guide의 견적서 수락
-    @PatchMapping("/{formId}/acceptForm")
-    public ResponseEntity<String> acceptFormStatus(@PathVariable Long formId) {
-        return ResponseEntity.ok().body(formService.acceptFormStatus(formId));
+    @PatchMapping("/{formId}/acceptForm/{guideId}")
+    public ResponseEntity<String> acceptFormStatus(@PathVariable Long formId, @PathVariable Long guideId) {
+        return ResponseEntity.ok().body(formService.acceptFormStatus(formId, guideId));
     }
 
     // 3. Guide의 견적서 거절
