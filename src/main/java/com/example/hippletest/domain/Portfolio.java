@@ -11,7 +11,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@RequiredArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) // Hibernate 프록시 필드 무시
 public class Portfolio {
 
