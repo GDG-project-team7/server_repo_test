@@ -24,18 +24,22 @@ public class Form {
 
     private Long age;           // 나이
     private boolean gender;     // 성별 (true: 남성, false: 여성)
-    private String text;        // 여행에 대한 텍스트 정보
+    private String requestText;        // 여행에 대한 텍스트 정보
     private Long travelDate;    // 여행 날짜 (여기서는 Long으로 표현, 실제로 Date타입이 필요할 수 있음)
+    //TODO: chane enum type
     private String isAccepted;
 
     // Form 객체를 생성하는 생성자
-    public Form(Long age, boolean gender, String text, Long travelDate, String isAccepted, Guide guide, Traveler traveler) {
+    public Form(Long age, boolean gender, String requestText, Long travelDate, String isAccepted, Traveler traveler) {
         this.age = age;
         this.gender = gender;
-        this.text = text;
+        this.requestText = requestText;
         this.travelDate = travelDate;
-        this.guide = null;
         this.traveler = traveler;
         this.isAccepted = isAccepted;
+    }
+
+    public void setGuideInForm(Guide guide){
+        this.guide = guide;
     }
 }

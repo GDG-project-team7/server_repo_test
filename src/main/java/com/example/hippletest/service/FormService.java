@@ -18,7 +18,8 @@ public class FormService {
     private final TravelerRepository travelerRepository;
 
     public Form getForm(Long id) {
-        return formRepository.findById(id).orElseThrow(() -> new RuntimeException("해당 견적서를 찾을 수 없습니다."));
+        return formRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("해당 견적서를 찾을 수 없습니다."));
     }
 
     public String submitForm(Long travelerId, Long guideId, Form formRequest) {
@@ -27,19 +28,21 @@ public class FormService {
         Guide guide = guideRepository.findById(guideId)
                 .orElseThrow(() -> new RuntimeException("Guide를 찾을 수 없습니다."));
 
-        //Long age, boolean gender, String text, Long travelDate, Guide guide, Traveler traveler
-        Form form = new Form(formRequest.getAge(), formRequest.isGender(), formRequest.getText(), formRequest.getTravelDate(), "pending", guide, traveler);
+        Form form = new Form(formRequest.getAge(), formRequest.isGender(), formRequest.getRequestText(), formRequest.getTravelDate(), "pending", traveler);
         formRepository.save(form);
 
         return "해당 견적서가 가이드에게 요청되었습니다.";
     }
 
     @Transactional
-    public String acceptFormStatus(Long formId) {
+    public String acceptFormStatus(Long formId, Long guideId) {
         Form form = formRepository.findById(formId)
                 .orElseThrow(() -> new RuntimeException("해당 견적서를 찾을 수 없습니다."));
 
         form.setIsAccepted("Accept");
+        form.setGuideInForm(guideRepository.findById(guideId)
+                .orElseThrow(() -> new RuntimeException("매칭하려는 guide의 ID를 존재하지 않습니다.")));
+
         return "성공적으로 수락되었습니다.";
     }
 
