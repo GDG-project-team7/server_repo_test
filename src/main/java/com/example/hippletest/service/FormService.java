@@ -3,6 +3,7 @@ package com.example.hippletest.service;
 import com.example.hippletest.domain.Form;
 import com.example.hippletest.domain.Guide;
 import com.example.hippletest.domain.Traveler;
+import com.example.hippletest.dto.RequestFormDto;
 import com.example.hippletest.repository.FormRepository;
 import com.example.hippletest.repository.GuideRepository;
 import com.example.hippletest.repository.TravelerRepository;
@@ -22,13 +23,11 @@ public class FormService {
                 .orElseThrow(() -> new RuntimeException("해당 견적서를 찾을 수 없습니다."));
     }
 
-    public String submitForm(Long travelerId, Long guideId, Form formRequest) {
-        Traveler traveler = travelerRepository.findById(travelerId)
+    public String submitForm(RequestFormDto requestFormDto) {
+        Traveler traveler = travelerRepository.findById(requestFormDto.getTravelerId())
                 .orElseThrow(() -> new RuntimeException("Traveler를 찾을 수 없습니다."));
-        Guide guide = guideRepository.findById(guideId)
-                .orElseThrow(() -> new RuntimeException("Guide를 찾을 수 없습니다."));
 
-        Form form = new Form(formRequest.getAge(), formRequest.isGender(), formRequest.getRequestText(), formRequest.getTravelDate(), "pending", traveler);
+        Form form = new Form(requestFormDto.getAge(), requestFormDto.isGender(), requestFormDto.getRequestText(), requestFormDto.getTravelDate(), "pending", traveler);
         formRepository.save(form);
 
         return "해당 견적서가 가이드에게 요청되었습니다.";
