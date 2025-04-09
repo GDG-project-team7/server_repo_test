@@ -2,6 +2,7 @@ package com.example.hippletest.controller;
 
 import com.example.hippletest.domain.Guide;
 import com.example.hippletest.domain.Portfolio;
+import com.example.hippletest.dto.ResponsePortfolioDto;
 import com.example.hippletest.service.TravelerService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -34,7 +35,7 @@ public class TravelerPageController {
 
     // 가이드의 포트폴리오를 조회합니다.
     @GetMapping("/getPortfolio/{guideId}")
-    public ResponseEntity<Portfolio> getPortfolioByGuideId(@PathVariable Long guideId){
+    public ResponseEntity<ResponsePortfolioDto> getPortfolioByGuideId(@PathVariable Long guideId){
         return ResponseEntity.ok().body(travelerService.getPortfolioByGuideId(guideId));
     }
 }
