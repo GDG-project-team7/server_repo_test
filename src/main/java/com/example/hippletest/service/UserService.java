@@ -1,6 +1,7 @@
 package com.example.hippletest.service;
 
 import com.example.hippletest.domain.*;
+import com.example.hippletest.dto.ResponsePortfolioDto;
 import com.example.hippletest.repository.GuideRepository;
 import com.example.hippletest.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -38,13 +39,15 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("포트폴리오를 작성하지 않았습니다."));
     }
 
-    public Portfolio saveInfoGuidePortfolio(Long id, Portfolio portfolio) {
+    public ResponsePortfolioDto saveInfoGuidePortfolio(Long id, Portfolio portfolio) {
         Guide guide = guideRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("가이드를 찾을 수 없습니다."));
         guide.setPortfolio(portfolio); // ✅ 포트폴리오 설정
         guideRepository.save(guide);
 
-        return guide.getPortfolio();
+        ResponsePortfolioDto portfolioDto = new ResponsePortfolioDto(portfolio);
+
+        return portfolioDto;
     }
 
     public List<Form> getForms(Long id) {

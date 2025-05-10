@@ -14,8 +14,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class Guide extends User {
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "portfolio_id")
+    @OneToOne(mappedBy = "guide", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
     private Portfolio portfolio; // Guide는 1개의 Portfolio를 가짐
 
