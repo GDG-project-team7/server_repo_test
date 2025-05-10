@@ -30,6 +30,9 @@ public class FormService {
         Form form = new Form(requestFormDto.getAge(), requestFormDto.isGender(), requestFormDto.getRequestText(), requestFormDto.getTravelDate(), "pending", traveler);
         formRepository.save(form);
 
+        form.setGuideInForm(guideRepository.findById(requestFormDto.getGuideId())
+                .orElseThrow(() -> new RuntimeException("매칭하려는 guide의 ID를 존재하지 않습니다.")));
+
         return "해당 견적서가 가이드에게 요청되었습니다.";
     }
 
